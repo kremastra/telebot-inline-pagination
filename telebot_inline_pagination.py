@@ -1,7 +1,7 @@
 from math import ceil
 from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
-def start_button_pagination(*, list_of_tuples, rows_per_page=3, buttons_text_index=1, next_page='--->'):
+def start_inline_pagination(*, list_of_tuples, rows_per_page=3, buttons_text_index=1, next_page='--->'):
     global buttons_text_data
     buttons_text_data = []
 
@@ -31,7 +31,7 @@ def start_button_pagination(*, list_of_tuples, rows_per_page=3, buttons_text_ind
                 )   
     return keyboard
 
-def edit_button_pagination(call: CallbackQuery, *, rows_per_page=3, next_page='--->', previous_page='<---'):
+def edit_inline_pagination(call: CallbackQuery, *, rows_per_page=3, next_page='--->', previous_page='<---'):
     global current_page
     if call.data == 'next_page' and current_page < pages:       
         current_page = current_page + 1
