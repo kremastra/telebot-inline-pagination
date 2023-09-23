@@ -34,7 +34,7 @@ def demo_pagination(message):
 @bot.callback_query_handler(func=lambda call: True)
 def demo_pagination_handler(call: CallbackQuery):
     if call.data in ('previous_page', 'next_page'):
-        bot.edit_message_text(text_message, reply_markup = edit_keyboard(call, list_of_tuples=data, button_text_type=button_text_type, text_index=text_index, callback_index=callback_index, rows_per_page=rows_per_page), chat_id = call.message.chat.id, message_id = call.message.message_id)
+        bot.edit_message_text(text_message, reply_markup = edit_keyboard(call, button_text_type=button_text_type, text_index=text_index, callback_index=callback_index, rows_per_page=rows_per_page), chat_id = call.message.chat.id, message_id = call.message.message_id)
     for i in data:
         if call.data == i[callback_index]:
             bot.send_message(

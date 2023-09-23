@@ -2,14 +2,20 @@ from math import ceil
 from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
 def send_keyboard(*, list_of_tuples, button_text_type=None, text_index=0, callback_index=0, rows_per_page=5, next_page='--->'):
+    global list_of_values
+    list_of_values = []
+
+    for i in list_of_tuples:
+            list_of_values.append(i)
+
     global count, pages, current_page
 
     current_page = 0
-    count = len(list_of_tuples)
+    count = len(list_of_values)
     pages = ceil(count/rows_per_page)    
 
     keyboard = InlineKeyboardMarkup()
-    for i in list_of_tuples[current_page*rows_per_page: current_page*rows_per_page+rows_per_page]:
+    for i in list_of_values[current_page*rows_per_page: current_page*rows_per_page+rows_per_page]:
         if button_text_type == None or button_text_type == 0:
             button = InlineKeyboardButton(text=i[0], callback_data=i[0])
         elif button_text_type == 1:
@@ -33,7 +39,7 @@ def send_keyboard(*, list_of_tuples, button_text_type=None, text_index=0, callba
                 )   
     return keyboard
 
-def edit_keyboard(call: CallbackQuery, *, list_of_tuples, button_text_type=None, text_index=0, callback_index=0, rows_per_page=5, next_page='--->', previous_page='<---'):
+def edit_keyboard(call: CallbackQuery, *, button_text_type=None, text_index=0, callback_index=0, rows_per_page=5, next_page='--->', previous_page='<---'):
     global current_page
     
     if call.data == 'next_page' and current_page < pages:       
@@ -42,7 +48,7 @@ def edit_keyboard(call: CallbackQuery, *, list_of_tuples, button_text_type=None,
         current_page = current_page - 1
 
     keyboard = InlineKeyboardMarkup()
-    for i in list_of_tuples[current_page*rows_per_page: current_page*rows_per_page+rows_per_page]:
+    for i in list_of_values[current_page*rows_per_page: current_page*rows_per_page+rows_per_page]:
         if button_text_type == None or button_text_type == 0:
             button = InlineKeyboardButton(text=i[0], callback_data=i[0])
         elif button_text_type == 1:
