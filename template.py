@@ -7,7 +7,7 @@ from telebot_inline_pagination import send_keyboard, edit_keyboard
 #tuples_airports = csv_airports.values.tolist() 
 #list_airports = [tuple(x) for x in tuples_airports] 
 
-data = [
+list_of_tuples = [
             ('Hartsfield-Jackson Atlanta International Airport', 'ATL/KATL', 'Atlanta, Georgia, United States'),
             ("O'Hare International Airport", 'ORD/KORD', 'Chicago, Illinois, United States'),
             ('Dallas/Fort Worth International Airport', 'DFW/KDFW', 'Coppell, Euless, Grapevine, and Irving, Texas, United States'),
@@ -22,20 +22,20 @@ data = [
 
 text_message = 'Демонстрация работы пагинатора'
 
-button_text_type = 2
+button_text_mode = 2
 text_index = 0
 callback_index = 1
 rows_per_page = 3
 
 @bot.message_handler(commands=['start'])
 def demo_pagination(message):
-    bot.send_message(message.from_user.id, text_message, reply_markup=send_keyboard(list_of_tuples=data, button_text_type=button_text_type, text_index=text_index, callback_index=callback_index, rows_per_page=rows_per_page))
+    bot.send_message(message.from_user.id, text_message, reply_markup=send_keyboard(list_of_tuples=list_of_tuples, button_text_mode=button_text_mode, text_index=text_index, callback_index=callback_index, rows_per_page=rows_per_page))
 
 @bot.callback_query_handler(func=lambda call: True)
 def demo_pagination_handler(call: CallbackQuery):
     if call.data in ('previous_page', 'next_page'):
-        bot.edit_message_text(text_message, reply_markup = edit_keyboard(call, button_text_type=button_text_type, text_index=text_index, callback_index=callback_index, rows_per_page=rows_per_page), chat_id = call.message.chat.id, message_id = call.message.message_id)
-    for i in data:
+        bot.edit_message_text(text_message, reply_markup = edit_keyboard(call, button_text_mode=button_text_mode, text_index=text_index, callback_index=callback_index, rows_per_page=rows_per_page), chat_id = call.message.chat.id, message_id = call.message.message_id)
+    for i in list_of_tuples:
         if call.data == i[callback_index]:
             bot.send_message(
                         call.message.chat.id,
