@@ -1,6 +1,6 @@
 # Telegram Inline Paginator for [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI/) (telebot)
 
-A library for pyTelegramBotAPI that allows you to easily do pagination for any Inline keyboards.
+A library for pyTelegramBotAPI that allows you to display data in the format of a pageable inline keyboard.
 
 ## Installation
 You can use [pip](https://pip.pypa.io/en/stable/) to install this library.
@@ -8,7 +8,7 @@ You can use [pip](https://pip.pypa.io/en/stable/) to install this library.
 pip install telebot-inline-pagination
 ```
 
-## Steps
+## Usage
 ### Step 1. Import necessary libraries and connect Telegram token
 
 ```py
@@ -21,7 +21,7 @@ from telebot_inline_pagination import Keyboard
 
 ### Required parameters
 
-**data**: Dataset in "list of tuples" format, without headers.
+**data**: Dataset in "list of tuples" format, without headers: [(a1, b1), (a2, b2), (a3, b3)].
 
 **text_message**: Message displayed above the keyboard.
 
@@ -65,8 +65,8 @@ text_index = 0 # in this example, full airport name
 callback_index = 1 # in this example, IATA/ICAO airport code
 button_text_mode = 2 # in this example, "full airport name (IATA/ICAO airport code)"
 rows_per_page = 3
-next_page = '--->'
-previous_page = '<---'
+next_page = '>'
+previous_page = '<'
 ```
 
 ### Step 3. Creating the pageable keyboard instance
@@ -105,7 +105,7 @@ def demo_pagination(message):
     for i, j in enumerate(keyboards):
         if j["id"] == message.chat.id:
             del keyboards[i]    
-    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=rows_per_page, button_text_mode=2, text_index=0, callback_index=1)}
+    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=rows_per_page, button_text_mode=button_text_mode, text_index=text_index, callback_index=callback_index)}
     keyboards.append(json)
     for i in keyboards:
         if i["id"] == message.chat.id:
@@ -166,8 +166,8 @@ text_index = 0
 callback_index = 1
 button_text_mode = 2
 rows_per_page = 3
-next_page = '--->'
-previous_page = '<---'
+next_page = '>'
+previous_page = '<'
 
 keyboards = []
 
@@ -199,7 +199,8 @@ def demo_pagination_handler(call: CallbackQuery):
 bot.infinity_polling()
 ```
 
+## Result
+
 ![button_text_mode.jpg](https://github.com/kremastra/telebot-inline-pagination/blob/main/img/button_text_mode.jpg?raw=true)
 
-## License
-[MIT](https://github.com/kremastra/telebot-inline-pagination/blob/main/LICENSE).
+## [MIT License](https://github.com/kremastra/telebot-inline-pagination/blob/main/LICENSE)
