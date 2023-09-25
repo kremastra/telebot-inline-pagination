@@ -15,9 +15,9 @@ data = [
             ('George Bush Intercontinental Airport', 'IAH/KIAH', 'Houston, Texas, United States')
         ]
 
-text_message = 'Demo'
+text_message = 'Demo (button_text_mode = 3)'
 
-button_text_mode = 2
+button_text_mode = 3
 text_index = 0
 callback_index = 1
 rows_per_page = 3
@@ -31,7 +31,7 @@ def demo_pagination(message):
     for i, j in enumerate(keyboards):
         if j["id"] == message.chat.id:
             del keyboards[i]
-    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=rows_per_page, button_text_mode=2, text_index=0, callback_index=1, next_page='>', previous_page='<')}
+    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=rows_per_page, button_text_mode=button_text_mode, text_index=text_index, callback_index=callback_index, next_page=next_page, previous_page=previous_page)}
     keyboards.append(json)
     for i in keyboards:
         if i["id"] == message.chat.id:
