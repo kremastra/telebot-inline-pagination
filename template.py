@@ -21,12 +21,17 @@ button_text_mode = 2
 text_index = 0
 callback_index = 1
 rows_per_page = 3
+next_page = '>'
+previous_page = '<'
 
 keyboards = []
 
 @bot.message_handler(commands=['start'])
 def demo_pagination(message):
-    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=rows_per_page, button_text_mode=2, text_index=0, callback_index=1)}
+    for i, j in enumerate(keyboards):
+        if j["id"] == message.chat.id:
+            del keyboards[i]
+    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=rows_per_page, button_text_mode=2, text_index=0, callback_index=1, next_page='>', previous_page='<')}
     keyboards.append(json)
     for i in keyboards:
         if i["id"] == message.chat.id:

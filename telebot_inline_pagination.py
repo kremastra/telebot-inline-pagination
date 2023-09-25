@@ -3,7 +3,7 @@ from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQu
 
 class Keyboard():
 
-    def __init__(self, chat_id, data, rows_per_page, button_text_mode, text_index, callback_index):
+    def __init__(self, chat_id, data, rows_per_page=5, button_text_mode=0, text_index=0, callback_index=0, next_page='--->', previous_page='<---'):
         self.chat_id = chat_id
         self.current_page = 0
         self.data = data
@@ -13,6 +13,8 @@ class Keyboard():
         self.button_text_mode = button_text_mode
         self.text_index = text_index
         self.callback_index = callback_index
+        self.next_page = next_page
+        self.previous_page = previous_page
 
     def text_callback(self):
         keyboard = InlineKeyboardMarkup()
@@ -28,23 +30,17 @@ class Keyboard():
             keyboard.add(button)
         return keyboard
 
-    def send_keyboard(self, *, next_page='--->'):      
+    def send_keyboard(self):      
         keyboard = self.text_callback()      
         if self.pages > 1:
             keyboard.add(
                     InlineKeyboardButton(text='-', callback_data='-'),
                     InlineKeyboardButton(text=f'{1}/{self.pages}', callback_data=f'{1}/{self.pages}'),
-                    InlineKeyboardButton(text=next_page, callback_data='next_page')
+                    InlineKeyboardButton(text=self.next_page, callback_data='next_page')
                     )
-        else:
-            keyboard.add(
-                    InlineKeyboardButton(text='-', callback_data='-'),
-                    InlineKeyboardButton(text=f'{1}/{self.pages}', callback_data=f'{1}/{self.pages}'),
-                    InlineKeyboardButton(text='-', callback_data='-')
-                    )   
         return keyboard
 
-    def edit_keyboard(self, call: CallbackQuery, *, next_page='--->', previous_page='<---'):        
+    def edit_keyboard(self, call: CallbackQuery):        
         if call.data == 'next_page' and self.current_page < self.pages:       
             self.current_page = self.current_page + 1
         elif call.data == 'previous_page' and self.current_page > 0:
@@ -56,19 +52,19 @@ class Keyboard():
             keyboard.add(
                 InlineKeyboardButton(text='-', callback_data='-'),
                 InlineKeyboardButton(text=f'{self.current_page+1}/{self.pages}', callback_data=f'{self.current_page+1}/{self.pages}'),
-                InlineKeyboardButton(text=next_page, callback_data='next_page')
+                InlineKeyboardButton(text=self.next_page, callback_data='next_page')
                 )
         elif self.pages - self.current_page == 1:
             keyboard.add(
-                InlineKeyboardButton(text=previous_page, callback_data='previous_page'),
+                InlineKeyboardButton(text=self.previous_page, callback_data='previous_page'),
                 InlineKeyboardButton(text=f'{self.current_page+1}/{self.pages}', callback_data=f'{self.current_page+1}/{self.pages}'),
                 InlineKeyboardButton(text='-', callback_data='-')
                 )            
         else:
             keyboard.add(
-                InlineKeyboardButton(text=previous_page, callback_data='previous_page'),
+                InlineKeyboardButton(text=self.previous_page, callback_data='previous_page'),
                 InlineKeyboardButton(text=f'{self.current_page+1}/{self.pages}', callback_data=f'{self.current_page+1}/{self.pages}'),
-                InlineKeyboardButton(text=next_page, callback_data='next_page')
+                InlineKeyboardButton(text=self.next_page, callback_data='next_page')
                 )      
         return keyboard      
    
