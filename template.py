@@ -15,9 +15,9 @@ data = [
             ('George Bush Intercontinental Airport', 'IAH/KIAH', 'Houston, Texas, United States')
         ]
 
-text_message = 'Demo (button_text_mode = 3)'
+text_message = 'Demo'
 
-button_text_mode = 3
+button_text_mode = 2
 text_index = 0
 callback_index = 1
 rows_per_page = 3
