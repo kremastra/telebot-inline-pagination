@@ -199,7 +199,7 @@ def demo_pagination_handler(call: CallbackQuery):
 bot.infinity_polling()
 ```
 
-![button_text_mode.jpg](https://github.com/kremastra/telebot-inline-pagination/blob/master/img/button_text_mode.jpg?raw=true)
+![button_text_mode.jpg](https://github.com/kremastra/telebot-inline-pagination/blob/main/img/button_text_mode.jpg?raw=true)
 
 ## License
 [MIT](https://github.com/kremastra/telebot-inline-pagination/blob/main/LICENSE).
