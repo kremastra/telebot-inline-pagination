@@ -201,6 +201,6 @@ bot.infinity_polling()
 
 ## Result
 
-![button_text_mode.jpg](https://github.com/kremastra/telebot-inline-pagination/blob/main/img/button_text_mode.jpg?raw=true)
+![button_text_mode.jpg](https://github.com/kremastra/telebot-inline-pagination/raw/main/img/button_text_mode.jpg?raw=true)
 
 ## [MIT License](https://github.com/kremastra/telebot-inline-pagination/blob/main/LICENSE)

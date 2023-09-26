@@ -1,3 +1,14 @@
-__pycache__
+# Additional files
+
+__pycache__/
 book_airports.csv
 api.py
+
+# PyPi
+
+*.egg-info/
+setup.py
+setup.cfg
+build/
+dist/
+*/init.py
