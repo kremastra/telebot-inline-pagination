@@ -1,6 +1,6 @@
 from api import bot # Telegram Token
 from telebot.types import CallbackQuery
-from telebot_inline_pagination import Keyboard
+from telebot_inline_pagination.keyboard import Keyboard
 
 data = [
             ('Hartsfield-Jackson Atlanta International Airport', 'ATL/KATL', 'Atlanta, Georgia, United States'),

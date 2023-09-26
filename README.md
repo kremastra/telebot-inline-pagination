@@ -1,4 +1,4 @@
-# Telegram Inline Paginator for [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI/) (telebot)
+# Pageable inline keyboard for [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI/) (telebot)
 
 A library for pyTelegramBotAPI that allows you to display data in the format of a pageable inline keyboard.
 
@@ -12,9 +12,12 @@ pip install telebot-inline-pagination
 ### Step 1. Import necessary libraries and connect Telegram token
 
 ```py
-from api import bot # Telegram Token in the file api.py
+from telebot import TeleBot
+
+bot = TeleBot('TOKEN', parse_mode=None) # Use your Telegram token
+
 from telebot.types import CallbackQuery
-from telebot_inline_pagination import Keyboard
+from telebot_inline_pagination.keyboard import Keyboard
 ```
 
 ### Step 2. Define the parameters
@@ -143,9 +146,12 @@ def demo_pagination_handler(call: CallbackQuery):
 In this example, the code implements multithreading: the bot can be used by several people at the same time without interfering with each other.
 
 ```py
-from api import bot # Telegram Token
+from telebot import TeleBot
+
+bot = TeleBot('TOKEN', parse_mode=None) # Use your Telegram token
+
 from telebot.types import CallbackQuery
-from telebot_inline_pagination import Keyboard
+from telebot_inline_pagination.keyboard import Keyboard
 
 data = [
             ('Hartsfield-Jackson Atlanta International Airport', 'ATL/KATL', 'Atlanta, Georgia, United States'),
@@ -201,6 +207,6 @@ bot.infinity_polling()
 
 ## Result
 
-![button_text_mode.jpg](https://github.com/kremastra/telebot-inline-pagination/raw/main/img/button_text_mode.jpg?raw=true)
+![button_text_mode.jpg](https://github.com/kremastra/telebot-inline-pagination/raw/main/img/button_text_mode.jpg)
 
 ## [MIT License](https://github.com/kremastra/telebot-inline-pagination/blob/main/LICENSE)
