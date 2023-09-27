@@ -1,6 +1,6 @@
 from api import bot # Telegram Token
 from telebot.types import CallbackQuery
-from telebot_inline_pagination.keyboard import Keyboard
+from telebot_inline_pagination import Keyboard
 
 data = [
             ('Hartsfield-Jackson Atlanta International Airport', 'ATL/KATL', 'Atlanta, Georgia, United States'),
@@ -17,12 +17,12 @@ data = [
 
 text_message = 'Demo'
 
-button_text_mode = 2
-text_index = 0
-callback_index = 1
-rows_per_page = 3
-next_page = '>'
-previous_page = '<'
+BUTTON_TEXT_MODE = 2
+TEXT_INDEX = 0
+CALLBACK_INDEX = 1
+ROWS_PER_PAGE = 3
+NEXT_PAGE = '>'
+PREVIOUS_PAGE = '<'
 
 keyboards = []
 
@@ -31,7 +31,7 @@ def demo_pagination(message):
     for i, j in enumerate(keyboards):
         if j["id"] == message.chat.id:
             del keyboards[i]
-    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=rows_per_page, button_text_mode=button_text_mode, text_index=text_index, callback_index=callback_index, next_page=next_page, previous_page=previous_page)}
+    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=ROWS_PER_PAGE, button_text_mode=BUTTON_TEXT_MODE, text_index=TEXT_INDEX, callback_index=CALLBACK_INDEX, next_page=NEXT_PAGE, previous_page=PREVIOUS_PAGE)}
     keyboards.append(json)
     for i in keyboards:
         if i["id"] == message.chat.id:
@@ -44,7 +44,7 @@ def demo_pagination_handler(call: CallbackQuery):
             if i["id"] == call.message.chat.id:
                 bot.edit_message_text(text_message, reply_markup = i["object"].edit_keyboard(call), chat_id = call.message.chat.id, message_id = call.message.message_id)
     for i in data:
-        if call.data == i[callback_index]:
+        if call.data == i[CALLBACK_INDEX]:
             bot.send_message(
                         call.message.chat.id,
                         'Airport: ' + i[0] + ' (' + i[1] + ')' + '\n' +
