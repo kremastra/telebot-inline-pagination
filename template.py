@@ -20,6 +20,7 @@ text_message = 'Demo'
 BUTTON_TEXT_MODE = 2
 TEXT_INDEX = 0
 CALLBACK_INDEX = 1
+ROW_WIDTH = 1
 ROWS_PER_PAGE = 3
 NEXT_PAGE = '>'
 PREVIOUS_PAGE = '<'
@@ -31,7 +32,7 @@ def demo_pagination(message):
     for i, j in enumerate(keyboards):
         if j["id"] == message.chat.id:
             del keyboards[i]
-    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=ROWS_PER_PAGE, button_text_mode=BUTTON_TEXT_MODE, text_index=TEXT_INDEX, callback_index=CALLBACK_INDEX, next_page=NEXT_PAGE, previous_page=PREVIOUS_PAGE)}
+    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, row_width=ROW_WIDTH rows_per_page=ROWS_PER_PAGE, button_text_mode=BUTTON_TEXT_MODE, text_index=TEXT_INDEX, callback_index=CALLBACK_INDEX, next_page=NEXT_PAGE, previous_page=PREVIOUS_PAGE)}
     keyboards.append(json)
     for i in keyboards:
         if i["id"] == message.chat.id:
