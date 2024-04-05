@@ -46,6 +46,7 @@ text_message = 'Demo'
 ```
 
 ### Optional parameters
+**row_width**: The number of buttons per row. (by default - 1)
 
 **rows_per_page**: The number of rows of buttons on one page, excluding the navigation bar (by default - 5).
 
@@ -67,6 +68,7 @@ text_message = 'Demo'
 TEXT_INDEX = 0 # in this example, full airport name
 CALLBACK_INDEX = 1 # in this example, IATA/ICAO airport code
 BUTTON_TEXT_MODE = 2 # in this example, "full airport name (IATA/ICAO airport code)"
+ROW_WIDTH = 1
 ROWS_PER_PAGE = 3
 NEXT_PAGE = '>'
 PREVIOUS_PAGE = '<'
@@ -108,7 +110,7 @@ def demo_pagination(message):
     for i, j in enumerate(keyboards):
         if j["id"] == message.chat.id:
             del keyboards[i]    
-    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=ROWS_PER_PAGE, button_text_mode=BUTTON_TEXT_MODE, text_index=TEXT_INDEX, callback_index=CALLBACK_INDEX, next_page=NEXT_PAGE, previous_page=PREVIOUS_PAGE)}
+    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, row_width=ROW_WIDTH, rows_per_page=ROWS_PER_PAGE, button_text_mode=BUTTON_TEXT_MODE, text_index=TEXT_INDEX, callback_index=CALLBACK_INDEX, next_page=NEXT_PAGE, previous_page=PREVIOUS_PAGE)}
     keyboards.append(json)
     for i in keyboards:
         if i["id"] == message.chat.id:
