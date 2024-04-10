@@ -83,7 +83,7 @@ class Keyboard():
                     for j in range(0, self.row_width):
                         button.append(
                             InlineKeyboardButton(
-                                text=page_data[i + j][self.text_index] + ' (' + i[self.callback_index] + ')',
+                                text=page_data[i + j][self.text_index] + ' (' + page_data[i + j][self.callback_index] + ')',
                                 callback_data=page_data[i + j][self.callback_index]
                             )
                         )
@@ -91,7 +91,7 @@ class Keyboard():
                     for j in range(0, self.row_width):
                         button.append(
                             InlineKeyboardButton(
-                                text=page_data[i + j][self.callback_index] + ' (' + i[self.text_index] + ')',
+                                text=page_data[i + j][self.callback_index] + ' (' + page_data[i + j][self.text_index] + ')',
                                 callback_data=page_data[i + j][self.callback_index]
                             )
                         )
