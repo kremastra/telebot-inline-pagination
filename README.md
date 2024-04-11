@@ -46,7 +46,7 @@ text_message = 'Demo'
 ```
 
 ### Optional parameters
-**row_width**: The number of buttons per row. (by default - 1)
+**row_width**: The number of buttons per row (from 1 to 3, by default - 1).
 
 **rows_per_page**: The number of rows of buttons on one page, excluding the navigation bar (by default - 5).
 
@@ -79,7 +79,7 @@ PREVIOUS_PAGE = '<'
 The standard pageable keyboard instance looks like this:
 
 ```py
-Keyboard(chat_id=message.chat.id, data=data, rows_per_page=ROWS_PER_PAGE, button_text_mode=BUTTON_TEXT_MODE, text_index=TEXT_INDEX, callback_index=CALLBACK_INDEX, next_page=NEXT_PAGE, previous_page=PREVIOUS_PAGE)
+Keyboard(chat_id=message.chat.id, data=data, row_width=ROW_WIDTH, rows_per_page=ROWS_PER_PAGE, button_text_mode=BUTTON_TEXT_MODE, text_index=TEXT_INDEX, callback_index=CALLBACK_INDEX, next_page=NEXT_PAGE, previous_page=PREVIOUS_PAGE)
 ```
 
 In this example, the instance is written to the variable **keyboards** to ensure multithreading:
@@ -89,7 +89,7 @@ keyboards = []
 
 ...
 
-    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=rows_per_page, button_text_mode=button_text_mode, text_index=text_index, callback_index=callback_index)}
+    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, row_width=ROW_WIDTH, rows_per_page=rows_per_page, button_text_mode=button_text_mode, text_index=text_index, callback_index=callback_index)}
     keyboards.append(json)
 ```   
 
@@ -98,7 +98,7 @@ keyboards = []
 The standard message handler for pageable keyboard looks like this:
 
 ```py
-bot.send_message(message.from_user.id, text_message, reply_markup=Keyboard.send_keyboard()
+bot.send_message(message.from_user.id, text_message, reply_markup=Keyboard.send_keyboard())
 ```
 
 In this example, the keyboard calls using the **/start** command. Also, 
@@ -153,7 +153,7 @@ from telebot import TeleBot
 bot = TeleBot('TOKEN', parse_mode=None) # Use your Telegram token
 
 from telebot.types import CallbackQuery
-from telebot_inline_pagination.keyboard import Keyboard
+from telebot_inline_pagination import Keyboard
 
 data = [
             ('Hartsfield-Jackson Atlanta International Airport', 'ATL/KATL', 'Atlanta, Georgia, United States'),
@@ -173,6 +173,7 @@ text_message = 'Demo'
 BUTTON_TEXT_MODE = 2
 TEXT_INDEX = 0
 CALLBACK_INDEX = 1
+ROW_WIDTH = 1
 ROWS_PER_PAGE = 3
 NEXT_PAGE = '>'
 PREVIOUS_PAGE = '<'
@@ -184,7 +185,7 @@ def demo_pagination(message):
     for i, j in enumerate(keyboards):
         if j["id"] == message.chat.id:
             del keyboards[i]
-    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, rows_per_page=ROWS_PER_PAGE, button_text_mode=BUTTON_TEXT_MODE, text_index=TEXT_INDEX, callback_index=CALLBACK_INDEX, next_page=NEXT_PAGE, previous_page=PREVIOUS_PAGE)}
+    json = {"id": message.chat.id, "object": Keyboard(chat_id=message.chat.id, data=data, row_width=ROW_WIDTH, rows_per_page=ROWS_PER_PAGE, button_text_mode=BUTTON_TEXT_MODE, text_index=TEXT_INDEX, callback_index=CALLBACK_INDEX, next_page=NEXT_PAGE, previous_page=PREVIOUS_PAGE)}
     keyboards.append(json)
     for i in keyboards:
         if i["id"] == message.chat.id:

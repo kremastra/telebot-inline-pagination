@@ -1,38 +1,28 @@
-#!/usr/bin/python3
-
 """
-inline_pagination.py:
-    This module contains difination of the class Keyboard
+Pageable inline keyboard for pyTelegramBotAPI.
+
+A library for pyTelegramBotAPI that allows you to display data in the format of a pageable inline keyboard.
 """
 
 from math import ceil
-from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup,\
-    CallbackQuery
-
+from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
 class Keyboard():
     """
     Keyboard:
-        A class that handles InlineKeyboardMarkup (reply keyboard markup in
-        Telegram bot API) buttons pagination.
+        A class that handles InlineKeyboardMarkup (reply keyboard markup in pyTelegramBotAPI) buttons pagination.
 
-    This is a documentation for the __init__ magic function of the class.
+    This is a documentation for the __init__ function of the class.
     Args:
-        chat_id (int): The id of the chat that the message containg the inline
-                       keyboard was sent in.
-        data (List[Tuple]): List of tuples containing ('button test',
-                            'call back data') in this format.
+        chat_id (int): The id of the chat that the message containing the inline keyboard was sent in.
+        data (List[Tuple]): List of tuples containing ('button text', 'callback data') in this format.
         row_width (int): Number of buttons to show per row.
         rows_per_page (int): Number of rows to show per page.
-        button_text_mode (int): The mode which the buttons texts will be
-                                displayed.
-        text_index (int): The index of the button text in the tuples in
-                          the data list you provided.
-        callback_index (int): The index of the callback data in the the tuples
-                              in the data list you provided.
-        next_page (str): The content that'll be shown in the next_page button.
-        previous_page (str): The content that'll be shown in the previous_page
-                             button.
+        button_text_mode (int): The mode which the buttons texts will be displayed.
+        text_index (int): The index of the button text in the tuples in the data list you provided.
+        callback_index (int): The index of the callback data in the the tuples in the data list you provided.
+        next_page (str): The content that will be shown in the next_page button.
+        previous_page (str): The content that will be shown in the previous_page button.
     """
 
     def __init__(
@@ -54,18 +44,16 @@ class Keyboard():
 
     def text_callback(self):
         """
-        text_callback: Generates the buttons for a single page. Determins
-                       content based on the self.current_page variable.
+        text_callback: Generates the buttons for a single page. Determines content based on the self.current_page variable.
 
         Return:
-            InlineKeyboardMarkup: object containg the button for the
-                                  self.current_page.
+            InlineKeyboardMarkup: object containing the button for the self.current_page.
         """
         keyboard = InlineKeyboardMarkup(row_width=self.row_width)
-        btns_per_page = self.rows_per_page * self.row_width
+        buttons_per_page = self.rows_per_page * self.row_width
         page_data = self.data[
-                self.current_page * btns_per_page:
-                self.current_page * btns_per_page + btns_per_page
+                self.current_page * buttons_per_page:
+                self.current_page * buttons_per_page + buttons_per_page
             ]
 
         try:
@@ -114,9 +102,7 @@ class Keyboard():
         send_keyboard: Generates the first page of the keyboard.
 
         Return:
-            InlineKeyboardMarkup: object containg the button for the
-            self.current_page and navigation buttons if there are
-            multiple pages.
+            InlineKeyboardMarkup: object containing the button for the self.current_page and navigation buttons if there are multiple pages.
         """
         keyboard = self.text_callback()
 
@@ -136,16 +122,13 @@ class Keyboard():
 
     def edit_keyboard(self, call: CallbackQuery):
         """
-        edit_keyboard: Edits keyboard pages when call from next_page and
-                       previous_page comes in.
+        edit_keyboard: Edits keyboard pages when call from next_page and previous_page comes in.
 
         Args:
-            call (CallbackQuery :obj:): The CallbackQuery object from the
-                                        next_page or previous_page buttons.
+            call (CallbackQuery :obj:): The CallbackQuery object from the next_page or previous_page buttons.
 
         Return:
-            InlineKeyboardMarkup: object containg the button for the
-            self.current_page and navigation buttons.
+            InlineKeyboardMarkup: object containing the button for the self.current_page and navigation buttons.
         """
         if call.data == 'next_page' and self.current_page < self.pages:
             self.current_page = self.current_page + 1
