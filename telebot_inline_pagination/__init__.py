@@ -121,7 +121,7 @@ class Keyboard():
         keyboard = self.text_callback()
 
         if self.pages > 1:
-            keyboard.add(
+            keyboard.row(
                     InlineKeyboardButton(text='-', callback_data='-'),
                     InlineKeyboardButton(
                         text=f'{1}/{self.pages}',
@@ -155,7 +155,7 @@ class Keyboard():
         keyboard = self.text_callback()
 
         if self.current_page == 0:
-            keyboard.add(
+            keyboard.row(
                 InlineKeyboardButton(text='-', callback_data='-'),
                 InlineKeyboardButton(
                     text=f'{self.current_page+1}/{self.pages}',
@@ -166,7 +166,7 @@ class Keyboard():
                 )
             )
         elif self.pages - self.current_page == 1:
-            keyboard.add(
+            keyboard.row(
                 InlineKeyboardButton(
                     text=self.previous_page, callback_data='previous_page'
                 ),
@@ -177,7 +177,7 @@ class Keyboard():
                 InlineKeyboardButton(text='-', callback_data='-')
             )
         else:
-            keyboard.add(
+            keyboard.row(
                 InlineKeyboardButton(
                     text=self.previous_page, callback_data='previous_page'
                 ),
