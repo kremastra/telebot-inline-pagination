@@ -1,4 +1,7 @@
-# Pageable inline keyboard for [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI/) (telebot)
+[![PyPi Package Version](https://img.shields.io/pypi/v/telebot-inline-pagination.svg)](https://pypi.python.org/pypi/telebot-inline-pagination)
+[![PyPi downloads](https://img.shields.io/pypi/dm/telebot-inline-pagination.svg)](https://pypi.org/project/telebot-inline-pagination/)
+
+# Pageable inline keyboard for [pyTelegramBotAPI](https://pypi.org/project/pyTelegramBotAPI/) (telebot)
 
 A library for pyTelegramBotAPI that allows you to display data in the format of a pageable inline keyboard.
 
@@ -212,4 +215,11 @@ bot.infinity_polling()
 
 ![button_text_mode.jpg](https://github.com/kremastra/telebot-inline-pagination/raw/main/img/button_text_mode.jpg)
 
-## [MIT License](https://github.com/kremastra/telebot-inline-pagination/blob/main/LICENSE)
+## License
+
+[MIT License](https://github.com/kremastra/telebot-inline-pagination/blob/main/LICENSE)
+
+## Contributors
+
+* [kremastra](https://github.com/kremastra)
+* [Mikias Abiy](https://github.com/mikias-abiy) (thanks for the feature "few buttons in row")
